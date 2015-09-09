@@ -41,16 +41,16 @@ var MarkDownWidget = function(sourceVal, previewId){
     return newstring;
   };
 
-  function removeStars(source){
-    return source.replace(/\*/g,"");
-  };
 
   return styleUnderscoreItalic(styleItalic(styleBold(styleBoldItalic(source_val))));
 };
 
 $('#source-id').keyup(function(){
   // console.log($("#source-id").val());
-  console.log((MarkDownWidget($("#source-id").val(),$("#preview-id"))));
+  newText = ((MarkDownWidget($("#source-id").val(),$("#preview-id"))));
+  console.log(newText);
+  $("#preview-div").empty();
+  $("#preview-div").append(newText);
 
 });
 
