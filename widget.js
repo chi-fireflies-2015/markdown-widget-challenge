@@ -15,28 +15,37 @@ MarkdownWidget.prototype.fillOutput = function(input){
 
 MarkdownWidget.prototype.checkStyle = function(input){
   if (input.match(/^[_].*[_]$/)){
-    $("#output").addClass("italic")
-    //and remove _ in front and back
-  } else if (input.match(/^[*].*[*]$/)) {
-    $("#output").addClass("italic")
+    return "<em>".concat(input.slice(1,-1)).concat("</em>");
+  } else if (input.match(/^[*][a-zA-Z]*[*]$/)) {
+    return "<em>".concat(input.slice(1,-1)).concat("</em>");
   } else if (input.match(/^[**].*[**]$/)) {
-    $("#output").addClass("bold")
+    var input2 = input.slice(1,-1)
+    return "<b>".concat(input2.slice(1,-1)).concat("</b>");
+
   } else {
     $("#output").removeClass();
+    return input
   }
 }
+
 
 function NewMarkdownWidgetView(element, model){
   this.element = element;
   this.model = model;
+  //should do this for distinct words
   element.on("keyup", this.onBodyChange.bind(this));
+  // element.checkIfWord//if keycode == space
 }
 
 NewMarkdownWidgetView.prototype.onBodyChange = function(){
   console.log(this)
-    var input = $(this.element).val();
-    this.model.checkStyle(input)
-    this.model.fillOutput(input)
+    var input = []
+    var inputArray = $(this.element).val().split(" ");
+    inputArray.forEach(function(word){
+      input.push(this.model.checkStyle(word));
+    }.bind(this));
+    var output = input.join(" ")
+    this.model.fillOutput(output)
     $("#output").html(this.model.body)
   }
 
