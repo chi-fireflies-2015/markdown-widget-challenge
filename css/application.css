@@ -1,0 +1,39 @@
+/** {
+  border: 1px solid red;
+}*/
+
+.container {
+  margin: 20px auto;
+  width: 1200px;
+  padding: 0px 20px 20px 20px;
+  border: 1px dotted black;
+}
+
+h1{
+  text-align: center;
+}
+
+.boxes{
+  text-align: center;
+}
+
+.input-container, .output-container {
+  display: inline-block;
+  width: 450px;
+}
+
+.input-box{
+  font-family: Arial;
+  font-size: 1em;
+  height: 266px;
+  width: 372px;
+}
+
+.output-box{
+  border: 1px solid black;
+  height: 266px;
+  width: 372px;
+  font-family: Arial;
+  font-size: 1em;
+  text-align: left;
+}
