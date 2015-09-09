@@ -7,7 +7,7 @@ var MarkDownWidget = function(sourceVal, previewId){
 
   function styleItalic(source){
     function makeItalic(match){
-      return "<i>"+match+"</i>";
+      return "<i>"+match.replace(/\*/g,"")+"</i>";
     };
     var newstring="";
     newstring = source.replace(/\*{1}[^\*]*\*{1}/g, makeItalic);
@@ -16,7 +16,7 @@ var MarkDownWidget = function(sourceVal, previewId){
 
   function styleBold(source){
     function makeBold(match){
-      return "<b>"+match+"</b>";
+      return "<b>"+match.replace(/\*/g,"")+"</b>";
     };
     var newstring="";
     newstring = source.replace(/\*{2}[^\*]*\*{2}/g, makeBold);
@@ -25,7 +25,7 @@ var MarkDownWidget = function(sourceVal, previewId){
 
   function styleUnderscoreItalic(source){
     function makeItalic(match){
-      return "<i>"+match+"</i>";
+      return "<i>"+match.replace(/\_/g,"")+"</i>";
     };
     var newstring="";
     newstring = source.replace(/\_{1}[^\_]*\_{1}/g, makeItalic);
@@ -34,7 +34,7 @@ var MarkDownWidget = function(sourceVal, previewId){
 
   function styleBoldItalic(source){
     function makeBold(match){
-      return "<b>"+match+"</b>";
+      return "<b><i>"+match.replace(/\*/g,"")+"</i></b>";
     };
     var newstring="";
     newstring = source.replace(/\*{3}[^\*]*\*{3}/g, makeBold);
@@ -42,10 +42,10 @@ var MarkDownWidget = function(sourceVal, previewId){
   };
 
   function removeStars(source){
-    return soure.replace(/\*/g,"");
+    return source.replace(/\*/g,"");
   };
 
-  return styleUnderscoreItalic(styleBold(styleItalic(styleBoldItalic(source_val))));
+  return styleUnderscoreItalic(styleItalic(styleBold(styleBoldItalic(source_val))));
 };
 
 $('#source-id').keyup(function(){
@@ -56,7 +56,7 @@ $('#source-id').keyup(function(){
 
 });
 
-
+  // this *is* _italic_ and **bold** and ***bolditalic***
   // \*{1}[^\*]*\*{1}  regex for italic *
   // \*{2}[^\*]*\*{2}  regex for bold
   // \*{3}[^\*]*\*{3}  regex for bold & italic
