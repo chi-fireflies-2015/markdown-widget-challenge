@@ -5,19 +5,47 @@ var MarkDownWidget = function(sourceVal, previewId){
   this.preview = previewId;
   var previewtext = "";
 
-  //previewtext = sourceVal.replace(/\*{1}[^\*]*\*{1}/,"")
   function styleItalic(source){
-    console.log("styleItalic source: "+source);
     function makeItalic(match){
-      return "<i>"+match+"</i>";//.italics();
+      return "<i>"+match+"</i>";
     };
-    //regex remove *s here
     var newstring="";
     newstring = source.replace(/\*{1}[^\*]*\*{1}/g, makeItalic);
-    console.log("newstring: "+newstring);
     return newstring;
   };
-  return styleItalic(source_val);
+
+  function styleBold(source){
+    function makeBold(match){
+      return "<b>"+match+"</b>";
+    };
+    var newstring="";
+    newstring = source.replace(/\*{2}[^\*]*\*{2}/g, makeBold);
+    return newstring;
+  };
+
+  function styleUnderscoreItalic(source){
+    function makeItalic(match){
+      return "<i>"+match+"</i>";
+    };
+    var newstring="";
+    newstring = source.replace(/\_{1}[^\_]*\_{1}/g, makeItalic);
+    return newstring;
+  };
+
+  function styleBoldItalic(source){
+    function makeBold(match){
+      return "<b>"+match+"</b>";
+    };
+    var newstring="";
+    newstring = source.replace(/\*{3}[^\*]*\*{3}/g, makeBold);
+    return newstring;
+  };
+
+  function removeStars(source){
+    return soure.replace(/\*/g,"");
+  };
+
+  return styleUnderscoreItalic(styleBold(styleItalic(styleBoldItalic(source_val))));
 };
 
 $('#source-id').keyup(function(){
